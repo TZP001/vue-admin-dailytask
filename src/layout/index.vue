@@ -7,12 +7,15 @@
         <navbar />
       </div>
       <app-main />
+      <right-panel v-if="showSettings">
+        <settings />
+      </right-panel>
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
+import { Navbar, Sidebar, Settings, AppMain } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -20,6 +23,7 @@ export default {
   components: {
     Navbar,
     Sidebar,
+    Settings,
     AppMain
   },
   mixins: [ResizeMixin],
@@ -29,6 +33,9 @@ export default {
     },
     device() {
       return this.$store.state.app.device
+    },
+    showSettings() {
+      return this.$store.state.settings.showSettings
     },
     fixedHeader() {
       return this.$store.state.settings.fixedHeader
